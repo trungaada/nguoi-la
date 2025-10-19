@@ -17,12 +17,11 @@
     overflow: hidden; 
   }
 
-  /* CSS MỚI: Container để căn giữa nội dung chính */
   .main-content {
-      max-width: 90%; 
-      margin: 0 auto; 
-      position: relative; 
-      z-index: 5;
+    max-width: 90%; 
+    margin: 0 auto; 
+    position: relative; 
+    z-index: 5;
   }
 
   h1 {
@@ -57,7 +56,7 @@
     position: relative;
   }
   button:hover {
-    transform: scale(1.05);
+    transform: scale(1.05) translateZ(0); 
     background-color: #ff1493;
   }
 
@@ -71,114 +70,82 @@
     animation: bounce 1s infinite alternate, pulseText 1.5s infinite ease-in-out;
     z-index: 5;
     position: relative;
+    will-change: transform;
   }
 
   @keyframes bounce {
-    from { transform: translateY(0); opacity: 0.8; }
-    to { transform: translateY(-5px); opacity: 1; }
+    from { transform: translateY(0); } 
+    to { transform: translateY(-5px); } 
   }
 
   @keyframes pulseText {
-    0% { transform: scale(1); }
-    50% { transform: scale(1.05); } 
-    100% { transform: scale(1); }
+    from { transform: scale(1); }
+    to { transform: scale(1.05); } 
   }
 
-  /* CSS cho icon nổi lên - ĐÃ TỐI ƯU HÓA */
   .floating-icon {
-      position: absolute;
-      bottom: -50px; 
-      color: rgba(255, 105, 180, 0.6); 
-      font-size: 1.5em;
-      pointer-events: none; 
-      animation: floatUp linear infinite;
-      text-shadow: 0 0 5px rgba(255, 105, 180, 0.3);
-      z-index: 0; 
-      /* Tối ưu hóa: chỉ thay đổi transform và opacity */
-      will-change: transform, opacity; 
+    position: absolute;
+    bottom: -50px; 
+    color: rgba(255, 105, 180, 0.6); 
+    font-size: 1.5em;
+    pointer-events: none; 
+    animation: floatUp linear infinite;
+    text-shadow: 0 0 5px rgba(255, 105, 180, 0.3);
+    z-index: 0; 
+    will-change: transform, opacity; 
   }
 
-  /* Keyframes đã đơn giản hóa */
   @keyframes floatUp {
-      /* Loại bỏ rotate(0deg) ban đầu */
-      0% { transform: translate(0, 0); opacity: 0.1; }
-      10% { opacity: 0.6; }
-      90% { opacity: 0.6; }
-      /* Loại bỏ rotate(360deg) cuối cùng */
-      100% { transform: translate(0, -120vh); opacity: 0; }
+    0% { transform: translate3d(0, 0, 0) rotate(0deg); opacity: 0.1; }
+    10% { opacity: 0.6; }
+    90% { opacity: 0.6; }
+    100% { transform: translate3d(0, -120vh, 0) rotate(720deg); opacity: 0; }
   }
 
-  /* RESPONSIVE */
   @media (max-width: 600px) {
-    h1 {
-      font-size: 2.2em;
-    }
-    p {
-      font-size: 1.1em;
-      margin-bottom: 20px;
-    }
-    button {
-      padding: 15px 30px;
-      font-size: 1.2em;
-    }
-    .click-hint {
-      font-size: 0.9em;
-    }
+    h1 { font-size: 2.2em; }
+    p { font-size: 1.1em; margin-bottom: 20px; }
+    button { padding: 15px 30px; font-size: 1.2em; }
+    .click-hint { font-size: 0.9em; }
   }
 </style>
 </head>
 <body>
-  
   <div class="main-content">
-      <h1>💐 Chúc Mie xinh gái 20/10 thật Vui Vẻ 💐</h1>
-      <p>Món quà nhỏ bé chứa đựng cả tấm lòng. Hãy nhấn nút bên dưới để nhận nhé 💌</p>
-      
-      <div>
-        <button onclick="nhanQua()">Nhận quà 💞</button>
-        <p class="click-hint">hãy bấm vào đây ✨</p> 
-      </div>
+    <h1>💐 Chúc Mie xinh gái 20/10 thật Vui Vẻ 💐</h1>
+    <p>Món quà nhỏ bé chứa đựng cả tấm lòng. Hãy nhấn nút bên dưới để nhận nhé 💌</p>
+    <div>
+      <button onclick="nhanQua()">Nhận quà 💞</button>
+      <p class="click-hint">hãy bấm vào đây ✨</p> 
+    </div>
   </div>
 
   <script>
     function nhanQua() {
-      window.location.href = "love.html"; // Chuyển sang trang quà
+      window.location.href = "love.html";
     }
 
     const body = document.body;
-    // Tối ưu hóa: Giảm số lượng icon khởi tạo
-    const totalIcons = 8; 
+    const totalIcons = 5; 
     const cuteIcons = ['💖', '💕', '💌', '🌸', '❤️', '🎀', '💞', '💝'];
 
     function createFloatingIcon() {
-        const iconElement = document.createElement('div');
-        iconElement.classList.add('floating-icon');
-        
-        const icon = cuteIcons[Math.floor(Math.random() * cuteIcons.length)];
-        iconElement.innerHTML = icon; 
-
-        const size = Math.random() * 1.5 + 0.8; 
-        iconElement.style.left = `${Math.random() * 100}vw`; 
-        iconElement.style.fontSize = `${size}em`;
-        
-        // Tối ưu hóa: Thay đổi dải thời gian animation
-        const duration = Math.random() * 8 + 12; // Thay đổi từ 15+10 thành 8+12 để có dải hẹp hơn
-        iconElement.style.animationDuration = `${duration}s`; 
-        iconElement.style.animationDelay = `-${Math.random() * 15}s`; // Giảm thời gian delay tối đa
-
-        body.appendChild(iconElement);
-
-        setTimeout(() => {
-            iconElement.remove();
-        }, duration * 1000);
+      const iconElement = document.createElement('div');
+      iconElement.classList.add('floating-icon');
+      const icon = cuteIcons[Math.floor(Math.random() * cuteIcons.length)];
+      iconElement.innerHTML = icon; 
+      const size = Math.random() * 1.5 + 0.8; 
+      iconElement.style.left = `${Math.random() * 100}vw`; 
+      iconElement.style.fontSize = `${size}em`;
+      const duration = Math.random() * 10 + 15;
+      iconElement.style.animationDuration = `${duration}s`; 
+      iconElement.style.animationDelay = `-${Math.random() * 20}s`; 
+      body.appendChild(iconElement);
+      setTimeout(() => iconElement.remove(), duration * 1000);
     }
 
-    // Tạo ra icon ban đầu
-    for (let i = 0; i < totalIcons; i++) {
-        createFloatingIcon();
-    }
-
-    // Tối ưu hóa: Định kỳ tạo icon mới (Tăng khoảng thời gian)
-    setInterval(createFloatingIcon, 4000); // Tăng từ 2000ms lên 4000ms
+    for (let i = 0; i < totalIcons; i++) createFloatingIcon();
+    setInterval(createFloatingIcon, 6000);
   </script>
 </body>
 </html>
