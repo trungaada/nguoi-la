@@ -19,9 +19,9 @@
 
   /* CSS MỚI: Container để căn giữa nội dung chính */
   .main-content {
-      max-width: 90%; /* Giới hạn chiều rộng nội dung */
-      margin: 0 auto; /* Căn giữa theo chiều ngang */
-      position: relative; /* Đảm bảo nội dung nằm trên icon */
+      max-width: 90%; 
+      margin: 0 auto; 
+      position: relative; 
       z-index: 5;
   }
 
@@ -31,7 +31,6 @@
     font-family: 'Dancing Script', cursive;
     margin-bottom: 20px;
     color: #e91e63;
-    /* Dòng chữ đã được căn giữa vì 'text-align: center' trong body */
   }
   
   @keyframes glow {
@@ -42,7 +41,6 @@
   p {
     font-size: 1.3em;
     margin-bottom: 30px;
-    /* Dòng chữ đã được căn giữa vì 'text-align: center' trong body */
   }
   button {
     background-color: #ff69b4;
@@ -86,7 +84,7 @@
     100% { transform: scale(1); }
   }
 
-  /* CSS cho icon nổi lên */
+  /* CSS cho icon nổi lên - ĐÃ TỐI ƯU HÓA */
   .floating-icon {
       position: absolute;
       bottom: -50px; 
@@ -96,14 +94,18 @@
       animation: floatUp linear infinite;
       text-shadow: 0 0 5px rgba(255, 105, 180, 0.3);
       z-index: 0; 
-      will-change: transform, opacity;
+      /* Tối ưu hóa: chỉ thay đổi transform và opacity */
+      will-change: transform, opacity; 
   }
 
+  /* Keyframes đã đơn giản hóa */
   @keyframes floatUp {
-      0% { transform: translate(0, 0) rotate(0deg); opacity: 0.1; }
+      /* Loại bỏ rotate(0deg) ban đầu */
+      0% { transform: translate(0, 0); opacity: 0.1; }
       10% { opacity: 0.6; }
       90% { opacity: 0.6; }
-      100% { transform: translate(0, -120vh) rotate(360deg); opacity: 0; }
+      /* Loại bỏ rotate(360deg) cuối cùng */
+      100% { transform: translate(0, -120vh); opacity: 0; }
   }
 
   /* RESPONSIVE */
@@ -128,7 +130,7 @@
 <body>
   
   <div class="main-content">
-      <h1>💐 Chúc mợ dì 20/10 thật hạnh phúc 💐</h1>
+      <h1>💐 Chúc Mie xinh gái 20/10 thật Vui Vẻ 💐</h1>
       <p>Món quà nhỏ bé chứa đựng cả tấm lòng. Hãy nhấn nút bên dưới để nhận nhé 💌</p>
       
       <div>
@@ -143,8 +145,9 @@
     }
 
     const body = document.body;
-    const totalIcons = 15; // Đã tối ưu hóa
-    const cuteIcons = ['💖', '✨', '💕', '💌', '🌸', '💫', '❤️', '🌟', '🎀', '💞', '🌷', '💝'];
+    // Tối ưu hóa: Giảm số lượng icon khởi tạo
+    const totalIcons = 8; 
+    const cuteIcons = ['💖', '💕', '💌', '🌸', '❤️', '🎀', '💞', '💝'];
 
     function createFloatingIcon() {
         const iconElement = document.createElement('div');
@@ -157,9 +160,10 @@
         iconElement.style.left = `${Math.random() * 100}vw`; 
         iconElement.style.fontSize = `${size}em`;
         
-        const duration = Math.random() * 15 + 10; 
+        // Tối ưu hóa: Thay đổi dải thời gian animation
+        const duration = Math.random() * 8 + 12; // Thay đổi từ 15+10 thành 8+12 để có dải hẹp hơn
         iconElement.style.animationDuration = `${duration}s`; 
-        iconElement.style.animationDelay = `-${Math.random() * 20}s`; 
+        iconElement.style.animationDelay = `-${Math.random() * 15}s`; // Giảm thời gian delay tối đa
 
         body.appendChild(iconElement);
 
@@ -173,8 +177,8 @@
         createFloatingIcon();
     }
 
-    // Định kỳ tạo icon mới (Đã tối ưu hóa: 2s)
-    setInterval(createFloatingIcon, 2000); 
+    // Tối ưu hóa: Định kỳ tạo icon mới (Tăng khoảng thời gian)
+    setInterval(createFloatingIcon, 4000); // Tăng từ 2000ms lên 4000ms
   </script>
 </body>
 </html>
