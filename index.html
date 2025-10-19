@@ -2,7 +2,7 @@
 <html lang="vi">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Quà 20/10 💖</title>
 <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Quicksand:wght@400;600&display=swap" rel="stylesheet">
 <style>
@@ -11,30 +11,42 @@
     font-family: 'Quicksand', sans-serif;
     text-align: center;
     color: #ff1493;
-    padding-top: 15vh;
+    /* Căn giữa tuyệt đối bằng Flexbox */
+    display: flex; /* Bật Flexbox */
+    justify-content: center; /* Căn giữa theo chiều ngang */
+    align-items: center; /* Căn giữa theo chiều dọc */
     min-height: 100vh;
+    margin: 0; /* Xóa margin mặc định */
     position: relative;
-    overflow: hidden; 
+    overflow: hidden;
   }
 
   .main-content {
-    max-width: 90%; 
-    margin: 0 auto; 
-    position: relative; 
+    /* Đảm bảo nội dung không quá rộng trên màn hình lớn */
+    max-width: 400px;
+    width: 90%;
+    margin: 0 auto;
+    position: relative;
     z-index: 5;
+    /* Thêm padding nhẹ để nội dung không chạm mép */
+    padding: 20px;
+    /* Thêm hiệu ứng nổi nhẹ cho khối nội dung */
+    background-color: rgba(255, 255, 255, 0.5);
+    border-radius: 20px;
+    box-shadow: 0 10px 30px rgba(255, 105, 180, 0.4);
   }
 
   h1 {
     font-size: 3em;
-    animation: glow 1.5s infinite alternate; 
+    animation: glow 1.5s infinite alternate;
     font-family: 'Dancing Script', cursive;
     margin-bottom: 20px;
     color: #e91e63;
   }
-  
+
   @keyframes glow {
     from { text-shadow: 0 0 10px #ff69b4, 0 0 20px #ff1493; }
-    to { text-shadow: 0 0 25px #ff1493, 0 0 35px #ff69b4; } 
+    to { text-shadow: 0 0 25px #ff1493, 0 0 35px #ff69b4; }
   }
 
   p {
@@ -52,17 +64,17 @@
     transition: 0.3s;
     box-shadow: 0 5px 15px rgba(255, 105, 180, 0.4);
     font-weight: 600;
-    z-index: 5; 
+    z-index: 5;
     position: relative;
   }
   button:hover {
-    transform: scale(1.05) translateZ(0); 
+    transform: scale(1.05) translateZ(0);
     background-color: #ff1493;
   }
 
   .click-hint {
     font-size: 1em;
-    color: #e91e63; 
+    color: #e91e63;
     text-shadow: 0 0 5px rgba(255, 105, 180, 0.5);
     margin-top: 15px;
     font-style: italic;
@@ -74,25 +86,25 @@
   }
 
   @keyframes bounce {
-    from { transform: translateY(0); } 
-    to { transform: translateY(-5px); } 
+    from { transform: translateY(0); }
+    to { transform: translateY(-5px); }
   }
 
   @keyframes pulseText {
     from { transform: scale(1); }
-    to { transform: scale(1.05); } 
+    to { transform: scale(1.05); }
   }
 
   .floating-icon {
     position: absolute;
-    bottom: -50px; 
-    color: rgba(255, 105, 180, 0.6); 
+    bottom: -50px;
+    color: rgba(255, 105, 180, 0.6);
     font-size: 1.5em;
-    pointer-events: none; 
+    pointer-events: none;
     animation: floatUp linear infinite;
     text-shadow: 0 0 5px rgba(255, 105, 180, 0.3);
-    z-index: 0; 
-    will-change: transform, opacity; 
+    z-index: 0;
+    will-change: transform, opacity;
   }
 
   @keyframes floatUp {
@@ -107,6 +119,7 @@
     p { font-size: 1.1em; margin-bottom: 20px; }
     button { padding: 15px 30px; font-size: 1.2em; }
     .click-hint { font-size: 0.9em; }
+    .main-content { padding: 15px; }
   }
 </style>
 </head>
@@ -116,35 +129,39 @@
     <p>Món quà nhỏ bé chứa đựng cả tấm lòng. Hãy nhấn nút bên dưới để nhận nhé 💌</p>
     <div>
       <button onclick="nhanQua()">Nhận quà 💞</button>
-      <p class="click-hint">hãy bấm vào đây ✨</p> 
+      <p class="click-hint">hãy bấm vào đây ✨</p>
     </div>
   </div>
 
   <script>
     function nhanQua() {
+      // Thay đổi 'love.html' bằng đường dẫn quà tặng thực tế của bạn
       window.location.href = "love.html";
     }
 
     const body = document.body;
-    const totalIcons = 5; 
+    const totalIcons = 5;
     const cuteIcons = ['💖', '💕', '💌', '🌸', '❤️', '🎀', '💞', '💝'];
 
     function createFloatingIcon() {
       const iconElement = document.createElement('div');
       iconElement.classList.add('floating-icon');
       const icon = cuteIcons[Math.floor(Math.random() * cuteIcons.length)];
-      iconElement.innerHTML = icon; 
-      const size = Math.random() * 1.5 + 0.8; 
-      iconElement.style.left = `${Math.random() * 100}vw`; 
+      iconElement.innerHTML = icon;
+      const size = Math.random() * 1.5 + 0.8;
+      iconElement.style.left = `${Math.random() * 100}vw`;
       iconElement.style.fontSize = `${size}em`;
       const duration = Math.random() * 10 + 15;
-      iconElement.style.animationDuration = `${duration}s`; 
-      iconElement.style.animationDelay = `-${Math.random() * 20}s`; 
+      iconElement.style.animationDuration = `${duration}s`;
+      iconElement.style.animationDelay = `-${Math.random() * 20}s`;
       body.appendChild(iconElement);
+      // Xóa icon sau khi bay hết màn hình
       setTimeout(() => iconElement.remove(), duration * 1000);
     }
 
+    // Khởi tạo các icon ban đầu
     for (let i = 0; i < totalIcons; i++) createFloatingIcon();
+    // Tạo thêm icon định kỳ
     setInterval(createFloatingIcon, 6000);
   </script>
 </body>
